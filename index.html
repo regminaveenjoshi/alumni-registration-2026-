@@ -615,6 +615,27 @@ iframe.onload=function(){
 
 };
 
+  function updateLiveCount(){
+
+  fetch(SCRIPT_URL + "?count=1")
+    .then(response => response.text())
+    .then(count => {
+
+      document.getElementById("liveCount").textContent =
+        count.trim();
+
+    })
+    .catch(error => {
+
+      console.log("Counter error:", error);
+
+    });
+
+}
+
+updateLiveCount();
+
+setInterval(updateLiveCount, 10000);
 </script>
 
 </body>
