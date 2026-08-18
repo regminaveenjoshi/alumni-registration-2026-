@@ -273,13 +273,29 @@ input:focus{
   font-size:13px;
   color:#9fb6cc;
 }
+  #musicBtn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:9999;
+  border:0;
+  padding:11px 16px;
+  border-radius:25px;
+  background:linear-gradient(90deg,#ff9800,#ff5722);
+  color:white;
+  font-weight:bold;
+  font-size:14px;
+  box-shadow:0 5px 20px #0007;
+  }
 </style>
 </head>
 
 <body>
-<audio id="bgMusic" loop autoplay>
+<audio id="bgMusic" loop preload="auto">
   <source src="Simple.mp3" type="audio/mpeg">
 </audio>
+
+<button id="musicBtn" onclick="startMusic()">🎵 Play Music</button>
 <div id="mainPage">
 
 <div class="container">
@@ -638,6 +654,18 @@ iframe.onload=function(){
 updateLiveCount();
 
 setInterval(updateLiveCount, 10000);
+  const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+function startMusic(){
+  bgMusic.volume = 0.7;
+
+  bgMusic.play().then(function(){
+    musicBtn.textContent = "🔊 Music On";
+  }).catch(function(error){
+    console.log("Music error:", error);
+  });
+}
 </script>
 
 </body>
